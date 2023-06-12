@@ -1,1 +1,4 @@
 ## Vehicle Similarity App
+
+My two year old son has an affinity for hotwheels and cars in general. This is an image similarity app that uses ResNet50 as a transfer learning model and Nearest Neighbors to identify similar cars when we go out and buy new ones. Existing collection of hotwheels images are loaded and saved to and S3 bucket. Feature extraction is then performed using the ResNet50 and TensorFlow. The extracted features are then loaded into a Nearest Neighbors model, where K similar images are presented when an image is uploaded. The back end of this model is ran using TensorFlow and Scikit-Learn, and served using Flask Restful API. The API is deployed using Docker containers and AWS services (ECS, ECR, and Fargate, and S3). 
+A web app will be generated for user access.  

@@ -43,19 +43,19 @@ class Dataset:
         return img
 
     @classmethod
-    def extract_features(cls, image, transfer_model):
+    def extract_features(cls, img, transfer_model):
         """
         Extracts features based on Resnet50 trained model for new and existing
         images
 
         Args:
-            image: image file
+            img: image file
             transfer_model: TensorFlow model used for transfer learning
         
         Returns:
             Array with normalized features from transformation
         """
-        img_array = image.img_to_array(image)
+        img_array = image.img_to_array(img)
         expanded_img_array = np.expand_dims(img_array, axis=0)
         preprocessed_img = preprocess_input(expanded_img_array)
         features = transfer_model.predict(preprocessed_img)

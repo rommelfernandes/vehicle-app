@@ -23,5 +23,6 @@ def output(img):
     distances, indices=model.predict(img)
     img1 = s3_client.from_s3(filenames[indices[0][1]])
     img2 = s3_client.from_s3(filenames[indices[0][2]])
+    print(filenames[indices[0][1]])
     return img1, img2
 

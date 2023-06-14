@@ -1,9 +1,11 @@
-
+import sys
+import os
 from flask import Flask, send_file, request, jsonify
 from PIL import Image
 from flask_restful import Api, Resource
 import logging
 
+sys.path.append(os.getcwd())
 from predict import output
 
 app = Flask(__name__)

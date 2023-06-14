@@ -16,5 +16,5 @@ class Model:
         self.classifier = self.s3_client.from_s3(model_file)
 
     def predict(self, img):
-        distances, indices = self.classifier.kneighbors(img)
+        distances, indices = self.classifier.kneighbors([img])
         return distances, indices

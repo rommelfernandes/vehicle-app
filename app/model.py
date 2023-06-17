@@ -1,5 +1,6 @@
+from config import region, s3_bucket
 from util import S3Object
-from config import s3_bucket, region
+
 
 class Model:
     def __init__(self, backend_model = None):

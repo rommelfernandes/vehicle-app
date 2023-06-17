@@ -3,6 +3,7 @@ from util import S3Object
 from dataset import Dataset
 from config import s3_bucket, region
 
+
 def output(img):
     """
     Takes in image and outputs two similar images based on images 
@@ -21,8 +22,7 @@ def output(img):
     model.load('models/toy-vehicles-resnet-knn.pkl')
     img = Dataset.extract_features(img, transfer_model)
     distances, indices=model.predict(img)
-    img1 = s3_client.from_s3(filenames[indices[0][1]])
-    img2 = s3_client.from_s3(filenames[indices[0][2]])
-    print(filenames[indices[0][1]])
-    return img1, img2
+    #img1 = s3_client.from_s3(filenames[indices[0][1]])
+    #img2 = s3_client.from_s3(filenames[indices[0][2]])
+    return filenames[indices[0][1]], filenames[indices[0][2]] # return s3 image location
 

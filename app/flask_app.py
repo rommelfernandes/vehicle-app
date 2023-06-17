@@ -7,11 +7,14 @@ import logging
 
 sys.path.append(os.getcwd())
 from predict import output
+from util import S3Object
+from config import s3_bucket, region,images_folder
 
 app = Flask(__name__)
 api = Api(app)
 
 class Predict(Resource):
+
     def post(self):
         file = request.files['image']
         # Read the image via file.stream
@@ -19,16 +22,27 @@ class Predict(Resource):
             size =(224, 224)
             )
         
-        img1, img2 = output(img)
+        file1, file2 = output(img)
         return jsonify({'msg': 'success', 
-                        'size': [img.width, img.height],
-                        'size1': [img1.width, img1.height],
-                        'size2': [img2.width, img2.height],
+                        'file1': file1,
+                        'file2': file2,
                         })
-
+    
+class Addfile(Resource):
+    
+    def post(self):
+        file = request.files['image']
+        img= Image.open(file.stream)
+        file_name = img['image'].name.split('/')[-1]
+        s3_client = S3Object(s3_bucket, region)
+        s3_client.to_s3(img, images_folder + file_name)
+        return jsonify({'msg': 'success',
+                         'file': f'file {file_name} added to S3'
+                         })
 
 
 api.add_resource(Predict, '/predict')
+api.add_resource(Addfile, '/add')
 
 if __name__ == '__main__':
     logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s | %(name)s | %(levelname)s | %(message)s')

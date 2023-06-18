@@ -16,6 +16,10 @@ api = Api(app)
 
 
 class Predict(Resource):
+    """
+    Allows users to submit image to /predict url and return
+    images in S3 bucket database similar to user image
+    """
     def post(self):
         file = request.files["image"]
         # Read the image via file.stream
@@ -32,6 +36,9 @@ class Predict(Resource):
 
 
 class Addfile(Resource):
+    """
+    Adds new image to S3 repository
+    """
     def post(self):
         file = request.files["image"]
         img = Image.open(file.stream)

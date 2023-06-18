@@ -3,7 +3,7 @@ from sklearn.neighbors import NearestNeighbors
 from dataset import Dataset
 from model import Model
 
-# as an ML engineer I used abstraction to hide unnecessary code and only present what
+# using abstraction to hide unnecessary code and only present what
 # data scientists would use to update the model (get data, get features, choose model
 # train model, save model)
 
